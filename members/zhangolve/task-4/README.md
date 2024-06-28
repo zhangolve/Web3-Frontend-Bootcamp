@@ -79,3 +79,17 @@ To know more about its features, check out our [website](https://scaffoldeth.io)
 We welcome contributions to Scaffold-ETH 2!
 
 Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+
+
+# 个人笔记
+
+https://dribbble.com/shots/16118903-Coinmakes-NFT-Marketplace-Dashboard
+
+设计图大概
+
+列出所有的NFT来，需要链上获取？？
+
+list nft 需要几步呢， 
+
+mint nft。
+list 

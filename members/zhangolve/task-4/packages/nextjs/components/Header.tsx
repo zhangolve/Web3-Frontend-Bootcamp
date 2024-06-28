@@ -20,9 +20,14 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "Debug Contracts",
-    href: "/debug",
-    icon: <BugAntIcon className="h-4 w-4" />,
+    label: "My NFT",
+    href: "/mynfts",
+    // icon: <BugAntIcon className="h-4 w-4" />,
+  },
+  {
+    label: "My Selling NFT",
+    href: "/sellingnfts",
+    // icon: <BugAntIcon className="h-4 w-4" />,
   },
 ];
 

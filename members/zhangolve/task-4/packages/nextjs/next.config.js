@@ -14,6 +14,16 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ipfs.filebase.io',
+        port: '',
+        // pathname: '/account123/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
