@@ -39,6 +39,26 @@ export const getTokenData = async ({tokenId, contractAddress, abi,targetNetwork}
 }
 
 
+
+export const useNFT = ({ contractAddress, abi,deployedNFTContractData,args}) => {
+  const { targetNetwork } = useTargetNetwork();
+  const { address: connectedAddress } = useAccount();
+  const {data: token, isFetching} = useReadContract({
+    address: contractAddress,
+    functionName: "getListing",
+    abi: abi,
+    chainId: targetNetwork.id,
+    args,
+    query: {
+      enabled: true,
+      retry: false,
+    },
+  });
+  return [token, isFetching]
+};
+
+
+
 const useDetailTokens = ({tokens, nftContractAddress, abi, targetNetwork})=>{
   const [detailedTokens, setDetailedTokens] = useState([])
   useEffect(()=>{

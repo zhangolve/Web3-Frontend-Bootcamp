@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import Link from "next/link";
 import React from 'react';
+import BlankTokenList from './BlankTokenList';
 
 const SquareImageList = ({ tokens }) => {
-
+  console.log('9999')
+  console.log(tokens,'tokens')
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
       {tokens.map((token, index) => (
@@ -26,6 +28,9 @@ const SquareImageList = ({ tokens }) => {
             </div>
         </>
       ))}
+      {
+        tokens.length===0 && <BlankTokenList/>
+      }
     </div>
   );
 }

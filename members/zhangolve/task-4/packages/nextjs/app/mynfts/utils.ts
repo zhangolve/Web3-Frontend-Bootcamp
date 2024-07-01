@@ -41,6 +41,7 @@ const useNFTs = ({ contractAddress, abi }) => {
       retry: false,
     },
   });
+  console.log(balance,'ba')
   
   useEffect(()=>{
     if(balance) {
@@ -77,6 +78,8 @@ const useNFTs = ({ contractAddress, abi }) => {
       console.log(tokens,'tokens');
     }
     fetchTokens();
+    } else {
+      setTokens([])
     }
   }, [balance])
 

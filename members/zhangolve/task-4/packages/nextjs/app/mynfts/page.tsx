@@ -4,6 +4,8 @@ import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-eth"
 
 import TokenList from "~~/components/nft/TokenList";
 import useNFTs from "./utils";
+import Loading from '~~/components/Loading'
+
 
 const NFTs = ({ deployedContractData }) => {
   const tokens = useNFTs({
@@ -11,10 +13,12 @@ const NFTs = ({ deployedContractData }) => {
     abi: deployedContractData.abi,
   });
 
+
   if(tokens ===null) {
-    return "loading";
+    return <Loading />
   }
 
+  console.log(tokens,'tokens')
   return (
     <div>
       <h1>My NFTs</h1>

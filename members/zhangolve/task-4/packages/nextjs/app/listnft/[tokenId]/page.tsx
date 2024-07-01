@@ -8,6 +8,8 @@ import type { NextPage } from "next";
 import { WriteOnlyFunctionForm } from "~~/app/debug/_components/contract";
 import useWriteMyContract from './hooks'
 import { parseEther } from 'viem'
+import { Transaction } from 'viem';
+import Success from '~~/components/nft/Success'
 
 
 
@@ -15,13 +17,6 @@ type PageProps = {
   params: { tokenId: number };
 };
 
-
-// <ul className="steps steps-vertical lg:steps-horizontal">
-//   <li className="step step-primary">Register</li>
-//   <li className="step step-primary">Choose plan</li>
-//   <li className="step">Purchase</li>
-//   <li className="step">Receive Product</li>
-// </ul>
 
 const Debug: NextPage = ({tokenId, deployedContractData, NFTMarketContractData}) => {
   const [handleWrite,txResult] = useWriteMyContract({
@@ -34,36 +29,14 @@ const Debug: NextPage = ({tokenId, deployedContractData, NFTMarketContractData})
     abi: NFTMarketContractData.abi,
     functionName: 'listNFT'
   });
-  const [price, setPrice] = useState(0)
-  console.log("9999", deployedContractData);
+  const [price, setPrice] = useState(0);
 
-  const fn = {
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "uri",
-        type: "string",
-      },
-    ],
-    name: "safeMint",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  };
   return (
     <>
       <div className="text-center mt-8 bg-secondary p-10">
-        <h1 className="text-4xl my-0">Debug Contracts</h1>
+        {!txResult &&
+        <>
+        <h1 className="text-4xl my-0">Please approve this Transaction</h1>
         <button
               className="btn btn-secondary"
               onClick={
@@ -71,13 +44,12 @@ const Debug: NextPage = ({tokenId, deployedContractData, NFTMarketContractData})
                 }
               >Sell it!
         </button>
-
+        </>
+        }
+        {txResult && !txNFTListResult &&
+        <>
         <p className="text-neutral">
           You can debug & interact with your deployed contracts here.
-          <br /> Check{" "}
-          <code className="italic bg-base-300 text-base font-bold [word-spacing:-0.5rem] px-1">
-            packages / nextjs / app / debug / page.tsx
-          </code>{" "}
         </p>
         {deployedContractData && (
           <input type="text" placeholder="How much" className="input input-bordered w-full max-w-xs" onChange={
@@ -89,6 +61,11 @@ const Debug: NextPage = ({tokenId, deployedContractData, NFTMarketContractData})
         <button className="btn btn-active btn-accent" onClick={
           ()=>handleListNFT([deployedContractData.address, tokenId, price])
         }>Submit</button>
+        </>
+      }
+      {
+        txNFTListResult && <Success />
+      }
       </div>
     </>
   );
@@ -108,4 +85,5 @@ const ListNFTPage = ({ params }: PageProps) => {
   return <Debug tokenId={tokenId} deployedContractData={deployedContractData} NFTMarketContractData={NFTMarketContractData}/>
 }
 
+// seller
 export default ListNFTPage;
